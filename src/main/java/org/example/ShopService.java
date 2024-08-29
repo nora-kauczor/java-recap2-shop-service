@@ -1,10 +1,14 @@
 package org.example;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class ShopService {
-// methoden der anderen repos "spiegeln" z.b. um neue bestellung zu platzieren
+    private OrderMapRepo orderMapRepo;
+
+
+
 
     public void placeOrder(Order newOrder, List<Order> orderList, List<Product> productList) {
         Set<Integer> productIds = newOrder.orderedProducts().keySet();
@@ -22,9 +26,38 @@ public class ShopService {
 
     }
 
-    // einziges was man am ende in main baut
-
     /////////////////////////////////boiler plate methods////////////////////////////////////////////////
 
 
+    public ShopService(OrderMapRepo orderMapRepo) {
+        this.orderMapRepo = orderMapRepo;
+    }
+
+    public OrderMapRepo getOrderMapRepo() {
+        return orderMapRepo;
+    }
+
+    public void setOrderMapRepo(OrderMapRepo orderMapRepo) {
+        this.orderMapRepo = orderMapRepo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShopService that = (ShopService) o;
+        return Objects.equals(orderMapRepo, that.orderMapRepo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(orderMapRepo);
+    }
+
+    @Override
+    public String toString() {
+        return "ShopService{" +
+                "orderMapRepo=" + orderMapRepo +
+                '}';
+    }
 }

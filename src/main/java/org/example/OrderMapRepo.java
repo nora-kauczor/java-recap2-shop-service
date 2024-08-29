@@ -8,9 +8,8 @@ public class OrderMapRepo implements OrderRepo {
     private Map<Integer, Order> orderMap = new HashMap<>();
 
     @Override
-    public void addOrder(int id) {
-        Order order = getOrderById(id);
-        orderMap.put(id, order);
+    public void addOrder(Order order) {
+        orderMap.put(order.id(), order);
     }
 
     @Override

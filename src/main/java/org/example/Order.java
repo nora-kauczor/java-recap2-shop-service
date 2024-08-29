@@ -8,8 +8,10 @@ public record Order(
         Map<Integer, Product> orderedProducts,
         double amount,
         String deliveryAddress
-        ) {
+) {
 
-
+    public Order orderWithAmount(double newAmount) {
+        return new Order(id(), orderedProducts(), newAmount, deliveryAddress());
+    }
 
 }

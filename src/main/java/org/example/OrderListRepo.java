@@ -8,8 +8,8 @@ public class OrderListRepo implements OrderRepo {
     private List<Order> orderList = new ArrayList<>();
 
     @Override
-    public void addOrder(int id) {
-        Order order = getOrderById(id);
+    public void addOrder(Order order
+    ) {
         orderList.add(order);
     }
 
