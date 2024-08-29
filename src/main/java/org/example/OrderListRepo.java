@@ -1,10 +1,11 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class OrderListRepo {
-    List<Order> orderList;
+    List<Order> orderList = new ArrayList<>();
 
 
     public void addOrder(int id){
@@ -23,9 +24,11 @@ public class OrderListRepo {
         for (Order order : orderList){
             if(order.id() == id){searchedOrder = order;}
         }
-        if (searchedOrder == null){System.out.println("Something went wrong when trying to get product.");}
+        if (searchedOrder == null){System.out.println("Something went wrong when trying to get order.");}
         return searchedOrder;
     };
+
+
 
     /////////////////////////////////boiler plate methods////////////////////////////////////////////////
 

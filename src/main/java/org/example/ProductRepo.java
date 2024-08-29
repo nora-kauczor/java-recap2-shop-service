@@ -25,6 +25,15 @@ public class ProductRepo {
         return searchedProduct;
     };
 
+    public static Product getProductById(int id, List<Product> productList){
+        Product searchedProduct = null;
+        for (Product product : productList){
+            if (product.id() == id){searchedProduct = product;}
+        }
+        if (searchedProduct == null){System.out.println("Something went wrong when trying to get product.");}
+        return searchedProduct;
+    };
+
   /////////////////////////////////boiler plate methods////////////////////////////////////////////////
 
 
