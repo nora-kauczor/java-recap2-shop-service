@@ -23,26 +23,24 @@ public class Main {
         myProducts.addProduct(blender);
         myProducts.addProduct(shoes);
         // Create order
-        Order tvAndBlenderOrder = new Order(new Random().nextInt(1000),
-                new HashMap<>(Map.ofEntries(Map.entry(tv.id(), tv), Map.entry(blender.id(), blender))),
-                0.00, "Susi Meier, Hauptstr. 10, 12345 Deppenstedt");
+//        Order tvAndBlenderOrder = new Order(new Random().nextInt(1000),
+//                new HashMap<>(Map.ofEntries(Map.entry(tv.id(), tv), Map.entry(blender.id(), blender))),
+//                0.00, "Susi Meier, Hauptstr. 10, 12345 Deppenstedt");
         // Add price
-        tvAndBlenderOrder = tvAndBlenderOrder.orderWithAmount(tv.price() + blender.price());
-        // Create another order
-        Map<Integer, Product> earbudsShoesBlender = new HashMap<>();
-        earbudsShoesBlender.put(earbuds.id(), earbuds);
-        earbudsShoesBlender.put(shoes.id(), shoes);
-        earbudsShoesBlender.put(blender.id(), blender);
-        double earbudsShoesBlenderAmount = earbuds.price() + shoes.price() + blender.price();
-        Order earbudsShoesBlenderOrder = new Order(new Random().nextInt(1000), earbudsShoesBlender, earbudsShoesBlenderAmount, "Markus Meier, Sonntagsgasse 10, 34890 Heidenheim");
-        // Add orders to OrderMapRepo
-        myOrderMapRepo.getOrderMap().put(tvAndBlenderOrder.id(), tvAndBlenderOrder);
-        myOrderMapRepo.addOrder(earbudsShoesBlenderOrder);
-        tvAndBlenderOrder = tvAndBlenderOrder.removeProductUpdatePrice(tv);
-        tvAndBlenderOrder = tvAndBlenderOrder.addProductUpdatePrice(tv);
+//        tvAndBlenderOrder = tvAndBlenderOrder.orderWithAmount(tv.price() + blender.price());
+//        // Create another order
+//        Map<Integer, Product> earbudsShoesBlender = new HashMap<>();
+//        earbudsShoesBlender.put(earbuds.id(), earbuds);
+//        earbudsShoesBlender.put(shoes.id(), shoes);
+//        earbudsShoesBlender.put(blender.id(), blender);
+//        double earbudsShoesBlenderAmount = earbuds.price() + shoes.price() + blender.price();
+//        Order earbudsShoesBlenderOrder = new Order(new Random().nextInt(1000), earbudsShoesBlender, earbudsShoesBlenderAmount, "Markus Meier, Sonntagsgasse 10, 34890 Heidenheim");
+//        // Add orders to OrderMapRepo
+//        myOrderMapRepo.getOrderMap().put(tvAndBlenderOrder.id(), tvAndBlenderOrder);
+//        myOrderMapRepo.addOrder(earbudsShoesBlenderOrder);
 
 
-        Order mariasOrder = new Order(laptop,
+        Order mariasOrder = new Order(laptop, 8,
                 "Maria Kaufmann, Eschenweg 38b, 34820 Zeusenen");
         System.out.println(mariasOrder);
 
