@@ -1,0 +1,7 @@
+package org.example;
+// später
+public class OrderMapRepo implements OrderRepo{
+
+
+    /////////////////////////////////boiler plate methods////////////////////////////////////////////////
+}
