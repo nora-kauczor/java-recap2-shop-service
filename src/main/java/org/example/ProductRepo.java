@@ -6,8 +6,7 @@ import java.util.Objects;
 public class ProductRepo {
     private List<Product> productList;
 
-    public void  addProduct(int id){
-        Product product = getProductById(id);
+    public void  addProduct(Product product){
         productList.add(product);
     }
 

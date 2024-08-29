@@ -28,7 +28,6 @@ public class Main {
         Order earbudsShoesBlenderOrder = new Order(new Random().nextInt(1000), earbudsShoesBlender, earbudsShoesBlenderAmount, "Markus Meier, Sonntagsgasse 10, 34890 Heidenheim" );
 
         myOrderMapRepo.getOrderMap().put(tvAndBlenderOrder.id(), tvAndBlenderOrder);
-        // mit methode aus klasse
         myOrderMapRepo.addOrder(earbudsShoesBlenderOrder);
         System.out.println(myOrderMapRepo);
     }
