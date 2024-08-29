@@ -26,6 +26,7 @@ public class Main {
         susisOrder = susisOrder.removeAllItemsOfProduct(candyBar);
         susisOrder = susisOrder.addProduct(apple, 2);
         susisOrder = susisOrder.addProduct(pencil, 10);
+        susisOrder = susisOrder.changeQuantity(pencil, 1);
         System.out.println(susisOrder);
     }
 }

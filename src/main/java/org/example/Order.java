@@ -55,9 +55,12 @@ public record Order(
     }
 
     public Order changeQuantity(Product product, int newQuantity) {
-        double newAmount = amount - product.price();
+        int oldQuantity = quantities.get(product.id());
+        int difference = oldQuantity - newQuantity;
+        if (difference < 1){removeAllItemsOfProduct(product); return null;}
+        double newAmount = amount - product.price()*difference;
         Map<Integer, Integer> newQuantities = quantities;
-        newQuantities.remove(product.id());
+        newQuantities.put(product.id(), newQuantity);
         return new Order(id, orderedProducts, newQuantities, newAmount, deliveryAddress);
     }
 
