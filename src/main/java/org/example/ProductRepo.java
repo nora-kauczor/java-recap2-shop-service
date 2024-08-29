@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ProductRepo {
-    List<Product> productList;
+    private List<Product> productList;
 
     public void  addProduct(int id){
         Product product = getProductById(id);

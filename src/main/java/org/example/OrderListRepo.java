@@ -4,31 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class OrderListRepo {
-    List<Order> orderList = new ArrayList<>();
+public class OrderListRepo implements OrderRepo {
+    private List<Order> orderList = new ArrayList<>();
 
-
-    public void addOrder(int id){
+    @Override
+    public void addOrder(int id) {
         Order order = getOrderById(id);
         orderList.add(order);
     }
 
-    public void removeOrder(int id){
+    @Override
+    public void removeOrder(int id) {
         Order order = getOrderById(id);
         orderList.remove(order);
     }
 
-
-    public Order getOrderById(int id){
+    @Override
+    public Order getOrderById(int id) {
         Order searchedOrder = null;
-        for (Order order : orderList){
-            if(order.id() == id){searchedOrder = order;}
+        for (Order order : orderList) {
+            if (order.id() == id) {
+                searchedOrder = order;
+            }
         }
-        if (searchedOrder == null){System.out.println("Something went wrong when trying to get order.");}
+        if (searchedOrder == null) {
+            System.out.println("Something went wrong when trying to get order.");
+        }
         return searchedOrder;
     };
-
-
 
     /////////////////////////////////boiler plate methods////////////////////////////////////////////////
 
@@ -36,6 +39,7 @@ public class OrderListRepo {
         this.orderList = orderList;
     }
 
+    @Override
     public List<Order> getOrderList() {
         return orderList;
     }
