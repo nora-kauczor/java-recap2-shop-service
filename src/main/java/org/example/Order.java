@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public record Order(
         int id,
@@ -18,6 +16,22 @@ public record Order(
                 new HashMap<>(Map.ofEntries(Map.entry(product.id(), product))),
                 new HashMap<>(Map.ofEntries(Map.entry(product.id(), quantity))),
                 product.price() * quantity, deliveryAddress);
+    }
+
+    public Order OrderSeveralProducts(Map<Integer, Product> orderedProducts, Map<Integer, Integer> quantities,
+                                String deliveryAddress) {
+        int id = new Random().nextInt(1000);
+        double amount = 0;
+        Map<Integer, Integer> quantities_ = new HashMap<Integer, Integer>();
+        Map<Integer, Product> orderedProducts_ = new HashMap<Integer, Product>();
+        Set<Product> productSet = new HashSet<>(orderedProducts.values());
+        for (Product product : productSet) {
+            int quantity = quantities.get(product.id());
+            quantities_.put(product.id(), quantity);
+            orderedProducts_.put(product.id(), product);
+            amount = amount + product.price() * quantity;
+        }
+        return new Order(id, orderedProducts_, quantities_, amount, deliveryAddress);
     }
 
     public Order addProduct(Product product, int quantity) {
@@ -48,7 +62,7 @@ public record Order(
         Map<Integer, Product> newOrderedProducts = orderedProducts;
         newOrderedProducts.remove(product.id());
         int quantity = quantities.get(product.id());
-        double newAmount = amount - product.price()*quantity;
+        double newAmount = amount - product.price() * quantity;
         Map<Integer, Integer> newQuantities = quantities;
         newQuantities.remove(product.id());
         return new Order(id, newOrderedProducts, newQuantities, newAmount, deliveryAddress);
@@ -57,8 +71,11 @@ public record Order(
     public Order changeQuantity(Product product, int newQuantity) {
         int oldQuantity = quantities.get(product.id());
         int difference = oldQuantity - newQuantity;
-        if (difference < 1){removeAllItemsOfProduct(product); return null;}
-        double newAmount = amount - product.price()*difference;
+        if (difference < 1) {
+            removeAllItemsOfProduct(product);
+            return null;
+        }
+        double newAmount = amount - product.price() * difference;
         Map<Integer, Integer> newQuantities = quantities;
         newQuantities.put(product.id(), newQuantity);
         return new Order(id, orderedProducts, newQuantities, newAmount, deliveryAddress);
