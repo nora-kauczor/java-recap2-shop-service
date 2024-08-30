@@ -59,21 +59,21 @@ public class ShopService {
         for (int id : productsIds) {
             Product product = productRepo.getProductById(id);
             if (!productRepo.getProductList().contains(product)) {
-                System.out.println("One or more of the products are not contained in catalogue.");
+                System.out.println("One or more of the products are not contained in catalogue."); return;
             }
             int quantityOrdered = quantities.get(id);
             int quantityInStock = inventory.get(id);
             System.out.println("quantityOrdered: "+quantityOrdered);
             System.out.println("quantityInStock: "+quantityInStock);
             if (quantityInStock < quantityOrdered) {
-                System.out.println("One or more of the products are not in stock in the quantity you wish to order.");
+                System.out.println("One or more of the products are not in stock in the quantity you wish to order."); return;
             } else {
                 decreaseInventory(product, quantityOrdered);
             }
         }
         Order newOrder = Order.orderSeveralProducts(orderedProducts, quantities, deliveryAddress);
-        orderMapRepo.getOrderList().add(newOrder);
-        System.out.println("Print aus methode: "+getOrderMapRepo());
+        orderMapRepo.addOrder(newOrder);
+        System.out.println("Print von getOrderMapRepo() aus placeOrder-methode: "+getOrderMapRepo());
     }
 
     /////////////////////////////////boiler plate methods////////////////////////////////////////////////

@@ -10,6 +10,7 @@ public class OrderMapRepo implements OrderRepo {
     @Override
     public void addOrder(Order order) {
         orderMap.put(order.id(), order);
+        System.out.println("Print von getOrderMap() aus placeOrder-methode: "+getOrderMap());
     }
 
     @Override
