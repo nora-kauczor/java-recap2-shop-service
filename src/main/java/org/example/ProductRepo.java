@@ -6,7 +6,7 @@ import java.util.Objects;
 public class ProductRepo {
     private List<Product> productList;
 
-    public void  addProduct(Product product){
+    public void addProduct(Product product){
         productList.add(product);
     }
 
@@ -16,15 +16,6 @@ public class ProductRepo {
     }
 
     public Product getProductById(int id){
-        Product searchedProduct = null;
-        for (Product product : productList){
-            if (product.id() == id){searchedProduct = product;}
-        }
-        if (searchedProduct == null){System.out.println("Something went wrong when trying to get product.");}
-        return searchedProduct;
-    };
-
-    public static Product getProductById(int id, List<Product> productList){
         Product searchedProduct = null;
         for (Product product : productList){
             if (product.id() == id){searchedProduct = product;}

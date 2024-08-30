@@ -53,8 +53,8 @@ public class ShopService {
         orderMapRepo.getOrderMap().put(newOrder.id(), newOrder);
     }
 
-    public void placeOrder(Map<Integer, Product> orderedProducts, Map<Integer, Integer> quantities,
-                           String deliveryAddress) {
+    public void placeOrder(Map<Integer, Product> orderedProducts, Map<Integer,
+            Integer> quantities, String deliveryAddress) {
         Set<Integer> productsIds = orderedProducts.keySet();
         for (int id : productsIds) {
             Product product = productRepo.getProductById(id);
