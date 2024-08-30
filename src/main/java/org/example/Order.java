@@ -1,5 +1,6 @@
 package org.example;
 
+import java.security.Key;
 import java.util.*;
 
 public record Order(
@@ -18,8 +19,8 @@ public record Order(
                 product.price() * quantity, deliveryAddress);
     }
 
-    public static Order OrderSeveralProducts(Map<Integer, Product> orderedProducts, Map<Integer, Integer> quantities,
-                                String deliveryAddress) {
+    public static Order orderSeveralProducts(Map<Integer, Product> orderedProducts, Map<Integer, Integer> quantities,
+                                             String deliveryAddress) {
         int id = new Random().nextInt(1000);
         double amount = 0;
         Map<Integer, Integer> quantities_ = new HashMap<Integer, Integer>();
@@ -68,17 +69,18 @@ public record Order(
         return new Order(id, newOrderedProducts, newQuantities, newAmount, deliveryAddress);
     }
 
-    public Order changeQuantity(Product product, int newQuantity) {
+    public Order changeQuantityOfSingleProduct(Product product, int newQuantity) {
         int oldQuantity = quantities.get(product.id());
         int difference = oldQuantity - newQuantity;
         if (difference < 1) {
             removeAllItemsOfProduct(product);
             return null;
         }
-        double newAmount = amount - product.price() * difference;
+        double newAmount = product.price() * newQuantity;
         Map<Integer, Integer> newQuantities = quantities;
         newQuantities.put(product.id(), newQuantity);
         return new Order(id, orderedProducts, newQuantities, newAmount, deliveryAddress);
+
     }
 
 

@@ -18,13 +18,29 @@ public class ShopService {
         inventory.put(product.id(), newQuantity);
     }
 
+    public void changeOrder(Order oldOrder, Map<Integer, Product> newOrderedProducts, Map<Integer, Integer> newQuantities) {
+        if (oldOrder.quantities().equals(newQuantities)) {System.out.println("No changes made in the order."); return;}
+        Set<Integer> productIds = newQuantities.keySet();
+        double newAmount = 0.00;
+        for (int id : productIds)
+        {
+            Product product = newOrderedProducts.get(id);
+            int quantity = newQuantities.get(id);
+            newAmount = newAmount + product.price()*quantity;
+
+        }
+        Order changedOrder = new Order(oldOrder.id(), newOrderedProducts, newQuantities, newAmount, oldOrder.deliveryAddress());
+        orderMapRepo.addOrder(changedOrder);
+    }
+
     public void placeOrder(Product product, int quantity, String deliveryAddress) {
         if (!productRepo.getProductList().contains(product)) {
             System.out.println("Product not contained in catalogue.");
             return;
         }
         if (inventory.get(product.id()) > quantity) {
-            System.out.println("The product is not in stock in the quantity you wish to order."); return;
+            System.out.println("The product is not in stock in the quantity you wish to order.");
+            return;
         }
         decreaseInventory(product, quantity);
         Order newOrder = new Order(product, quantity, deliveryAddress);
@@ -47,7 +63,7 @@ public class ShopService {
                 decreaseInventory(product, quantityOrdered);
             }
         }
-        Order newOrder = Order.OrderSeveralProducts(orderedProducts, quantities, deliveryAddress);
+        Order newOrder = Order.orderSeveralProducts(orderedProducts, quantities, deliveryAddress);
         orderMapRepo.getOrderList().add(newOrder);
     }
 
