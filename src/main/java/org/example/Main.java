@@ -38,26 +38,36 @@ public class Main {
         ShopService myShopService = new ShopService(myInventory, myOrderMapRepo, myProductRepo);
         ////////////////// Use ShopService //////////////////////////////
 //        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
-        myShopService.placeOrder(laptop, 8,
-                "Maria Kaufmann, Eschenweg 38b, 34820 Zeusenen");
-        System.out.println("OrderMapRepo: "+myShopService.getOrderMapRepo().getOrderList());
-//        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
-        myShopService.increaseInventory(laptop, 300);
-//        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
-
-        Order mariasOrder = myOrderMapRepo.getOrderById(303);
-        System.out.println("Maria's order: "+mariasOrder);
-//        mariasOrder = mariasOrder.removeOneItemOfProduct(laptop);
+//        myShopService.placeOrder(laptop, 8,
+//                "Maria Kaufmann, Eschenweg 38b, 34820 Zeusenen");
+//        System.out.println("OrderMapRepo: "+myShopService.getOrderMapRepo().getOrderList());
+////        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
+//        myShopService.increaseInventory(laptop, 300);
+////        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
+//
+//        Order mariasOrder = myOrderMapRepo.getOrderById(303);
 //        System.out.println("Maria's order: "+mariasOrder);
+////        mariasOrder = mariasOrder.removeOneItemOfProduct(laptop);
+////        System.out.println("Maria's order: "+mariasOrder);
+//
+////        myShopService.changeOrder(mariasOrder);
+////        Order susisOrder = new Order(candyBar, 3,
+////                "Susi Sonntag, Hauptstr. 10, 12345 Deppstedt");
+////        susisOrder = susisOrder.removeAllItemsOfProduct(candyBar);
+////        susisOrder = susisOrder.addProduct(apple, 2);
+////        susisOrder = susisOrder.addProduct(pencil, 10);
+////        susisOrder = susisOrder.changeQuantity(pencil, 1);
 
-//        myShopService.changeOrder(mariasOrder);
-//        Order susisOrder = new Order(candyBar, 3,
-//                "Susi Sonntag, Hauptstr. 10, 12345 Deppstedt");
-//        susisOrder = susisOrder.removeAllItemsOfProduct(candyBar);
-//        susisOrder = susisOrder.addProduct(apple, 2);
-//        susisOrder = susisOrder.addProduct(pencil, 10);
-//        susisOrder = susisOrder.changeQuantity(pencil, 1);
 
+myShopService.decreaseInventory(tv, 10);
+myShopService.decreaseInventory(apple, 10);
+        Map<Integer, Product> orderedProducts = new HashMap<>(Map.ofEntries(
+                Map.entry(tv.id(), tv), Map.entry(apple.id(), apple)));
+        Map<Integer, Integer> quantities = new HashMap<>(Map.ofEntries(
+                Map.entry(tv.id(), 5), Map.entry(apple.id(), 1)));
+        myShopService.placeOrder(orderedProducts, quantities, "Testadresse 123");
+        System.out.println(myShopService.getOrderMapRepo());
+        System.out.println(myShopService.getOrderMapRepo().getOrderMap().keySet().size());
 
     }
 

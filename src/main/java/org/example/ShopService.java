@@ -63,7 +63,9 @@ public class ShopService {
             }
             int quantityOrdered = quantities.get(id);
             int quantityInStock = inventory.get(id);
-            if (quantityInStock > quantityOrdered) {
+            System.out.println("quantityOrdered: "+quantityOrdered);
+            System.out.println("quantityInStock: "+quantityInStock);
+            if (quantityInStock < quantityOrdered) {
                 System.out.println("One or more of the products are not in stock in the quantity you wish to order.");
             } else {
                 decreaseInventory(product, quantityOrdered);
@@ -71,6 +73,7 @@ public class ShopService {
         }
         Order newOrder = Order.orderSeveralProducts(orderedProducts, quantities, deliveryAddress);
         orderMapRepo.getOrderList().add(newOrder);
+        System.out.println("Print aus methode: "+getOrderMapRepo());
     }
 
     /////////////////////////////////boiler plate methods////////////////////////////////////////////////
