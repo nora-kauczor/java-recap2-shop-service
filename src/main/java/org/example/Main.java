@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
+        ////////////////// Build ShopService //////////////////////////////
         OrderMapRepo myOrderMapRepo = new OrderMapRepo(new HashMap<>());
         Product tv = new Product(149384904, "UltraHD Smart TV", "TechVision", 599.99);
         Product earbuds = new Product(24342421, "Wireless Earbuds", "SoundWave", 79.99);
@@ -35,10 +36,21 @@ public class Main {
         myInventory.put(pencil.id(), 10);
         myInventory.put(candyBar.id(), 30);
         ShopService myShopService = new ShopService(myInventory, myOrderMapRepo, myProductRepo);
+        ////////////////// Use ShopService //////////////////////////////
+//        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
+        myShopService.placeOrder(laptop, 8,
+                "Maria Kaufmann, Eschenweg 38b, 34820 Zeusenen");
+        System.out.println("OrderMapRepo: "+myShopService.getOrderMapRepo().getOrderList());
+//        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
+        myShopService.increaseInventory(laptop, 300);
+//        System.out.println("Laptops in stock: "+myInventory.get(laptop.id()));
 
+        Order mariasOrder = myOrderMapRepo.getOrderById(303);
+        System.out.println("Maria's order: "+mariasOrder);
+//        mariasOrder = mariasOrder.removeOneItemOfProduct(laptop);
+//        System.out.println("Maria's order: "+mariasOrder);
 
-//        Order mariasOrder = new Order(laptop, 8,
-//                "Maria Kaufmann, Eschenweg 38b, 34820 Zeusenen");
+//        myShopService.changeOrder(mariasOrder);
 //        Order susisOrder = new Order(candyBar, 3,
 //                "Susi Sonntag, Hauptstr. 10, 12345 Deppstedt");
 //        susisOrder = susisOrder.removeAllItemsOfProduct(candyBar);

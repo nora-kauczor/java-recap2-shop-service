@@ -9,8 +9,12 @@ public class ShopService {
 
 
     public void decreaseInventory(Product product, int quantitySold) {
-        int newQuantity = inventory.get(product.id()) - quantitySold;
-        inventory.put(product.id(), newQuantity);
+        int inStock = inventory.get(product.id());
+        if (inStock < quantitySold) {
+            System.out.println("Something went wrong.");
+        }
+        int newStock = inStock - quantitySold;
+        inventory.put(product.id(), newStock);
     }
 
     public void increaseInventory(Product product, int quantityBought) {
@@ -19,14 +23,16 @@ public class ShopService {
     }
 
     public void changeOrder(Order oldOrder, Map<Integer, Product> newOrderedProducts, Map<Integer, Integer> newQuantities) {
-        if (oldOrder.quantities().equals(newQuantities)) {System.out.println("No changes made in the order."); return;}
+        if (oldOrder.quantities().equals(newQuantities)) {
+            System.out.println("No changes made in the order.");
+            return;
+        }
         Set<Integer> productIds = newQuantities.keySet();
         double newAmount = 0.00;
-        for (int id : productIds)
-        {
+        for (int id : productIds) {
             Product product = newOrderedProducts.get(id);
             int quantity = newQuantities.get(id);
-            newAmount = newAmount + product.price()*quantity;
+            newAmount = newAmount + product.price() * quantity;
 
         }
         Order changedOrder = new Order(oldOrder.id(), newOrderedProducts, newQuantities, newAmount, oldOrder.deliveryAddress());
@@ -38,13 +44,13 @@ public class ShopService {
             System.out.println("Product not contained in catalogue.");
             return;
         }
-        if (inventory.get(product.id()) > quantity) {
+        if (inventory.get(product.id()) < quantity) {
             System.out.println("The product is not in stock in the quantity you wish to order.");
             return;
         }
         decreaseInventory(product, quantity);
         Order newOrder = new Order(product, quantity, deliveryAddress);
-        orderMapRepo.getOrderList().add(newOrder);
+        orderMapRepo.getOrderMap().put(newOrder.id(), newOrder);
     }
 
     public void placeOrder(Map<Integer, Product> orderedProducts, Map<Integer, Integer> quantities,

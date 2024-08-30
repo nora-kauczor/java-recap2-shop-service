@@ -19,10 +19,11 @@ public class OrderMapRepo implements OrderRepo {
 
     @Override
     public Order getOrderById(int id) {
-        if (orderMap.get(id) == null) {
-            System.out.println("Something went wrong when trying to get order.");
+        Order order = orderMap.get(id);
+        if (order == null) {
+            System.out.println("Something went wrong when trying to get order by ID.");
         }
-        return orderMap.get(id);
+        return order;
     }
 
 //    @Override
