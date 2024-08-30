@@ -27,21 +27,6 @@ public class OrderMapRepo implements OrderRepo {
         return order;
     }
 
-//    @Override
-//    public Order getOrderById(int searchedId) {
-//        Order searchedOrder = null;
-//        Set<Integer> orderIds = orderList.keySet();
-//        for (int id : orderIds) {
-//            if (id == searchedId) {
-//                searchedOrder = orderList.get(id);
-//            }
-//        }
-//        if (searchedOrder == null) {
-//            System.out.println("Something went wrong when trying to get order.");
-//        }
-//        return searchedOrder;
-//    };
-
     @Override
     public List<Order> getOrderList() {
         return new ArrayList<>(orderMap.values());
