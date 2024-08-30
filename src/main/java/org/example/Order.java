@@ -18,7 +18,7 @@ public record Order(
                 product.price() * quantity, deliveryAddress);
     }
 
-    public Order OrderSeveralProducts(Map<Integer, Product> orderedProducts, Map<Integer, Integer> quantities,
+    public static Order OrderSeveralProducts(Map<Integer, Product> orderedProducts, Map<Integer, Integer> quantities,
                                 String deliveryAddress) {
         int id = new Random().nextInt(1000);
         double amount = 0;

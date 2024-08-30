@@ -8,6 +8,7 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         OrderMapRepo myOrderMapRepo = new OrderMapRepo(new HashMap<>());
+
         ShopService myShopService = new ShopService(myOrderMapRepo);
         Product tv = new Product(149384904, "UltraHD Smart TV", "TechVision", 599.99);
         Product earbuds = new Product(24342421, "Wireless Earbuds", "SoundWave", 79.99);
